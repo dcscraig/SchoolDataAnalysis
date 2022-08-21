@@ -11,19 +11,17 @@ All education establishments that use SQA courses will have a coordinator that c
 
 Grade boundaries, Component marks and national attainment is provided by the SQA Statistics and information (https://www.sqa.org.uk/sqa/78673.html). I have included the files that I have used with minor alterations. 
 
+![Image of sqa results]https://github.com/dcscraig/SchoolDataAnalysis/blob/98967ce96621ded16fcef691e2c189f857f7350d/emptyresulta.png
+
 # Description
 
 These are a group of scripts that provides result analysis. 
 
-## Overview
-
-Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the right (worse average performance). TODO more description.
-
-![Image of subject overview](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/subject_overview.png)
-
 ## Result Trends
 
-Produces mark trends for all subjects in your school.
+Produces mark trends for all subjects in your school over the last few years exluding 2020 and 2021.
+
+![Image of subject trend](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/trends.png)
 
 ## Gradeboundaries
 
@@ -31,11 +29,18 @@ Produces comparison graphs of the grade boundaries for all sqa subjects in your 
 
 ![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/gradeboundaries.png)
 
+## Overview
+
+Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the right (worse average performance). TODO more description.
+
+![Image of subject overview](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/subject_overview.png)
+
 
 ## Find Near Miss
 
 This script will produce a list of students and their courses for which they missed out in getting the next grade by 1 or 2 marks. 
 
+I haven included an exmple of obvious data protection issues.
 
 # Technical
 
@@ -51,8 +56,6 @@ This includes students who still passed! All access to the data is through a Dat
 ## Gaelic Medium Subjects
 
 There are a variety of courses that are offered in Gaelic. 
-
-
 
 
 
