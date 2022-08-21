@@ -1,6 +1,16 @@
 # School Data Analysis
 Individual Scottish school data analysis for SQA results. 
 
+
+# Requirements
+
+Python3, Pandas, Numpy, Seaborne. Install Anaconda (https://www.anaconda.com/)
+
+# Usage
+
+You will need to add your own school results file from your sqa coordinator. Name it the year you are analysing ie Data/SchoolResults/2022.xlsx .
+
+
 # Background
 
 Insight (https://insight-guides.scotxed.net/stepbystep.htm) provides Scottish schools a variety of metrics to judge attainment. The release schedule for Insight is often several months after results day. It would be useful to have an overview of results as soon as they are released and for more in depth anaylsis of those results to be conducted.
