@@ -15,7 +15,7 @@ python resulttrends.py will produce the result trends pdfs of all the N5 subject
 
 # Background
 
-Insight (https://insight-guides.scotxed.net/stepbystep.htm) provides Scottish schools a variety of metrics to judge attainment. The release schedule for Insight is often several months after results day. It would be useful to have an overview of results as soon as they are released and for more in depth anaylsis of those results to be conducted.
+Insight (https://insight-guides.scotxed.net/stepbystep.htm) provides Scottish schools a variety of metrics to judge attainment. The release schedule for Insight is often several months after results day. It would be useful to have an overview of results as soon as they are released and for more in depth analysis of those results to be conducted.
 
 # Requirements
 
@@ -73,7 +73,7 @@ This includes students who still passed! All access to the data is through a Dat
 
 ## Gaelic Medium Subjects
 
-There are a variety of courses that are offered in Gaelic. They are treated as one subject by the SQA in the reporting of attainment statisitcs but seperately in component analysis. The overview script treats them as individual subjects while the trend script combines them. This feature is likely to be buggy. I would recommend cross validating.     
+There are a variety of courses that are offered in Gaelic. They are treated as one subject by the SQA in the reporting of attainment statistics but seperately in component analysis. The overview script treats them as individual subjects while the trend script combines them. This feature is likely to be buggy. I would recommend cross validating.     
 
 
 
