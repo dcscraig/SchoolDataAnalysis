@@ -9,6 +9,8 @@ Python3, Pandas, Numpy, Seaborne. Install Anaconda (https://www.anaconda.com/)
 
 You will need to add your own school results file from your sqa coordinator. Name it the year you are analysing ie Data/SchoolResults/2022.xlsx .
 
+python Overview.py will produce a pdf of all the N5 subjects and another pdf for all the Higher Subjects.
+
 
 # Background
 
