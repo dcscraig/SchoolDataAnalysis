@@ -11,7 +11,7 @@ All education establishments that use SQA courses will have a coordinator that c
 
 Grade boundaries, Component marks and national attainment is provided by the SQA Statistics and information (https://www.sqa.org.uk/sqa/78673.html). I have included the files that I have used with minor alterations. 
 
-![Image of sqa results]https://github.com/dcscraig/SchoolDataAnalysis/blob/98967ce96621ded16fcef691e2c189f857f7350d/emptyresulta.png
+![Image of sqa results](https://github.com/dcscraig/SchoolDataAnalysis/blob/98967ce96621ded16fcef691e2c189f857f7350d/emptyresulta.png)
 
 # Description
 
