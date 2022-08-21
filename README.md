@@ -33,12 +33,6 @@ Produces mark trends for all subjects in your school over the last few years exl
 
 ![Image of subject trend](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/trends.png)
 
-## Gradeboundaries
-
-Produces comparison graphs of the grade boundaries for all sqa subjects in your school.
-
-![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/gradeboundaries.png)
-
 ## Overview
 
 Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the left (worse average performance). TODO more description.
@@ -51,6 +45,12 @@ Provides a page for each subject with an estimated mark distribution, grade perc
 This script will produce a list of students and their courses for which they missed out in getting the next grade by 1 or 2 marks. 
 
 I have not included an example for obvious data protection issues.
+
+## Grade Boundaries
+
+Produces comparison graphs of the grade boundaries for all sqa subjects in your school.
+
+![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/gradeboundaries.png)
 
 # Technical
 
