@@ -1,5 +1,60 @@
-# SchoolDataAnalysis
+# School Data Analysis
 Individual Scottish school data analysis for SQA results. 
+
+# Background
+
+Insight (https://insight-guides.scotxed.net/stepbystep.htm) provides Scottish schools a variety of metrics to judge attainment. The release schedule for Insight is often several months after results day. It would be useful to have an overview of results as soon as they are released and for more in depth anaylsis of those results to be conducted.
+
+# Requirements
+
+All education establishments that use SQA courses will have a coordinator that can access results for the entire establishment. Most of the analysis included here will need those results in an Excel spreadsheet.
+
+Grade boundaries, Component marks and national attainment is provided by the SQA Statistics and information (https://www.sqa.org.uk/sqa/78673.html). I have included the files that I have used with minor alterations. 
+
+# Description
+
+These are a group of scripts that provides result analysis. 
+
+## Overview
+
+Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the right (worse average performance). TODO more description.
+
+![Image of subject overview](https://github.com/dcscraig/SchoolDataAnalysis/blob/master/subject_overview.png)
+
+## Result Trends
+
+Produces mark trends for all subjects in your school.
+
+## Gradeboundaries
+
+Produces comparison graphs of the grade boundaries for all sqa subjects in your school.
+
+![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/master/gradeboundaries.png)
+
+
+## Find Near Miss
+
+This script will produce a list of students and their courses for which they missed out in getting the next grade by 1 or 2 marks. 
+
+
+# Technical
+
+I have tried to comment the code to help understanding but the current documentation level leaves a lot to be desired. Data access is handled through DataStore and makes use of a DataCache to reduce repeated file access. Not entirely convinced that this approach is conceptually that great but it works.
+
+## Incomplete data
+
+Any student who does not have a complete record, say they did not have a mark for a component of their assessment, has been removed from the data.
+This includes students who still passed! All access to the data is through a DataStore class. There are options to remove said students for the following functions (readTotalMarks and readRawMarks [remove_incomplete=True])
+
+
+
+## Gaelic Medium Subjects
+
+There are a variety of courses that are offered in Gaelic. 
+
+
+
+
 
 ## Authors
 
