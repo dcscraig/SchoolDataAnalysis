@@ -25,34 +25,40 @@ Grade boundaries, Component marks and national attainment is provided by the SQA
 
 ![Image of sqa results](https://github.com/dcscraig/SchoolDataAnalysis/blob/98967ce96621ded16fcef691e2c189f857f7350d/emptyresulta.png)
 
-# Description
+# Scripts
 
-These are a group of scripts that provides result analysis. 
-
-## Result Trends
+## Result Trends (resulttrends.py)
 
 Produces mark trends for all subjects in your school over the last few years exluding 2020 and 2021.
 
 ![Image of subject trend](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/trends.png)
 
-## Overview
+## Overview (Overview.py)
 
 Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the left (worse average performance). TODO more description.
 
 ![Image of subject overview](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/subject_overview.png)
 
 
-## Find Near Miss
+## Find Near Miss (findNearMiss.py)
 
 This script will produce a list of students and their courses for which they missed out in getting the next grade by 1 or 2 marks. 
 
 I have not included an example for obvious data protection issues.
 
-## Grade Boundaries
+## Grade Boundaries (gradeboundaries.py)
 
 Produces comparison graphs of the grade boundaries for all sqa subjects in your school.
 
 ![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/gradeboundaries.png)
+
+## Grade Boundary vs Attainment (nationalBoundaryAttainment.py)
+
+Looks at the relationship between a subject's A grade boundary and the % of pupils attaining an A. Some interesting grade boundary decisions...
+
+![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/boundvsattain.png)
+
+
 
 # Technical
 
