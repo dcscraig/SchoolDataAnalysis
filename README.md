@@ -41,7 +41,7 @@ Produces comparison graphs of the grade boundaries for all sqa subjects in your 
 
 ## Overview
 
-Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the right (worse average performance). TODO more description.
+Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the left (worse average performance). TODO more description.
 
 ![Image of subject overview](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/subject_overview.png)
 
@@ -50,7 +50,7 @@ Provides a page for each subject with an estimated mark distribution, grade perc
 
 This script will produce a list of students and their courses for which they missed out in getting the next grade by 1 or 2 marks. 
 
-I haven included an exmple of obvious data protection issues.
+I have not included an example for obvious data protection issues.
 
 # Technical
 
@@ -65,7 +65,7 @@ This includes students who still passed! All access to the data is through a Dat
 
 ## Gaelic Medium Subjects
 
-There are a variety of courses that are offered in Gaelic. 
+There are a variety of courses that are offered in Gaelic. They are treated as one subject by the SQA in the reporting of attainment statisitcs but seperately in component analysis. The overview script treats them as individual subjects while the trend script combines them. This feature is likely to be buggy. I would recommend cross validating.     
 
 
 
