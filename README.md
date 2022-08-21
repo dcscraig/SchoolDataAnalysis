@@ -19,7 +19,7 @@ These are a group of scripts that provides result analysis.
 
 Provides a page for each subject with an estimated mark distribution, grade percentage comparison with national and component mark comparisons. The estimated mark distribution is experimental and should be treated with caution. I would recommend comparing the overall shape of the school mark and national distributions , ie is the peak shifted to the right (better average performance) or to the right (worse average performance). TODO more description.
 
-![Image of subject overview](https://github.com/dcscraig/SchoolDataAnalysis/blob/master/subject_overview.png)
+![Image of subject overview](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/subject_overview.png)
 
 ## Result Trends
 
@@ -29,7 +29,7 @@ Produces mark trends for all subjects in your school.
 
 Produces comparison graphs of the grade boundaries for all sqa subjects in your school.
 
-![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/master/gradeboundaries.png)
+![Image of grade boundaries](https://github.com/dcscraig/SchoolDataAnalysis/blob/main/gradeboundaries.png)
 
 
 ## Find Near Miss
