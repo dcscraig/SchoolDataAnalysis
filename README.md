@@ -1,6 +1,5 @@
 # School Data Analysis
-Individual Scottish school data analysis for SQA results. 
-
+Automated individual Scottish school data analysis for SQA results. 
 
 # Requirements
 
