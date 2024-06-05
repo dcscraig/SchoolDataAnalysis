@@ -18,9 +18,9 @@ class DataCache:
 
     def add(self,filename,option=None):
         if option!=None:
-            temp = pd.read_excel(filename,sheet_name = option,header=self.header)
+            temp = pd.read_excel(filename,sheet_name = option,header=self.header,thousands=",")
         else:
-            temp = pd.read_excel(filename,header=self.header)
+            temp = pd.read_excel(filename,header=self.header,thousands=",")
             
         if self.data_clean !=None:
             temp = self.data_clean(temp)
@@ -41,7 +41,7 @@ class DataCache:
 
 class ComponentCache:
 
-    def __init__(self,filename,header=1):
+    def __init__(self,filename,header=2):
         self.filename = filename
         self.cache = DataCache(self.__cleanData,header)
         self.sheet_names = {}
@@ -49,6 +49,7 @@ class ComponentCache:
         self.sheet_names[76] = "Higher"
         
     def __cleanData(self,data):
+        print(data.columns)
         if("Gaidhlig" in data['Subject'].unique()):
             data['Subject'] = data['Subject'].replace(['Gaidhlig'], 'Gàidhlig')
         return data
@@ -106,6 +107,8 @@ class NationalAttainmentCache:
         
         
     def __cleanData(self,data):
+        print(data.columns)
+        data = data.replace("[c]",numpy.nan)
         if("Gaidhlig" in data['Subject'].unique()):
             data['Subject'] = data['Subject'].replace(['Gaidhlig'], 'Gàidhlig')
         return data
@@ -113,7 +116,7 @@ class NationalAttainmentCache:
     def reformat(self,data,year):
         temp = ["Subject","Grade A Count"]
         for i in ["A-B","A-C","A-D"]:
-            temp.append("Grades "+i+" Count")
+            temp.append("Grade "+i+" Count")
         temp.append("No Award Count")
         temp.append("Entries")
         for i in range(1,len(temp)):
@@ -133,6 +136,13 @@ class NationalAttainmentCache:
 
         data = data[temp]
         data = data.rename(columns=col_dict)
+        data = data.fillna(0)
+        data["A"] = data["A"].astype(int)
+        data["A-B"] = data["A-B"].astype(int)
+        data["A-C"] = data["A-C"].astype(int)
+        data["A-D"] = data["A-D"].astype(int)
+        data["Total"] = data["Total"].astype(int)
+        
         data["B"] = data["A-B"] - data["A"]
         data["C"] = data["A-C"] - data["A-B"]
         data["D"] = data["A-D"] - data["A-C"]
@@ -156,28 +166,28 @@ class NationalAttainmentCache:
 
 
 if __name__=="__main__":
-    level = 75
-    filename = "Data/GradeBoundaries/2017-2022.xlsx"
-    cache = BoundaryCache(filename)
-    data = cache.getData(level)
-    print(data)
+    # level = 75
+    # filename = "Data/GradeBoundaries/2017-2023.xlsx"
+    # cache = BoundaryCache(filename)
+    # data = cache.getData(level)
+    # print(data)
     
-    year = 2022
-    filename = "Data/PortreeResults/?.xlsx"
+    # year = 2022
+    # filename = "Data/SchoolResults/2023.xlsx"
 
-    results = ResultCache(filename)
-    data = results.getData(year)
-    data = results.getData(year)
-    data = results.getData(year)
+    # results = ResultCache(filename)
+    # data = results.getData(year)
+    # data = results.getData(year)
+    # data = results.getData(year)
 
-    filename = "Data/sqaAttainment/2018-2022.xls"  
-    national = NationalAttainmentCache(filename)
-    data = national.getData(2022,76)
-    print (data)
+    # filename = "Data/sqaAttainment/2019-2023.xls"  
+    # national = NationalAttainmentCache(filename)
+    # data = national.getData(2023,75)
+    # print (data)
 
-    filename = "Data/ComponentMarks/?.xlsx"
+    filename = "Data/ComponentMarks/2023.xlsx"
     component = ComponentCache(filename)
-    data = component.getData(2022,76)
+    data = component.getData(2023,75)
     print (data)
 
         

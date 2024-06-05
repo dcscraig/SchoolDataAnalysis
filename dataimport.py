@@ -11,18 +11,18 @@ import numpy
 class DataStore:
 
     def __init__(self):
-        self.valid_years = [2017,2018,2018,2019,2022]
+        self.valid_years = [2018,2019,2022,2023]
         self.valid_levels = [75,76]
         self.valid_grades = ["A","B","C","D"]
         self.results_cache = {}
 
         results_filename = "Data/SchoolResults/?.xlsx"
         self.results = ResultCache(results_filename)
-        boundary_filename = "Data/GradeBoundaries/2017-2022.xlsx"
+        boundary_filename = "Data/GradeBoundaries/2017-2023.xlsx"
         self.boundaries = BoundaryCache(boundary_filename)
-        sqa_filename = "Data/sqaAttainment/2018-2022.xls"  
+        sqa_filename = "Data/sqaAttainment/2019-2023.xlsx"  
         self.sqa_attainment = NationalAttainmentCache(sqa_filename)
-        comp_filename = "Data/ComponentMarks/?.xlsx"  
+        comp_filename = "Data/ComponentMarks/2023.xlsx"  
         self.components = ComponentCache(comp_filename)
         
     def checkYears(self,year):
