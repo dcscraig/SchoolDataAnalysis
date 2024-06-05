@@ -29,7 +29,10 @@ def getMarks(level,subject,data,years,combine=True):
                     if(len(other_lang)!=0):
                         temp = numpy.concatenate((temp,other_lang))
                 elif subject =="Mathematics":
-                    other_lang = data.readTotalMarks(year,level,"Matamataig",remove_incomplete=True)
+                    other_lang = data.readTotalMarks(year,level,"Matamataig (Mathematics)",remove_incomplete=True)
+                    print("Maths!!")
+                    print("Gmaths length:")
+                    print(len(other_lang))
                     if(len(other_lang)!=0):
                         temp = numpy.concatenate((temp,other_lang))
                 elif subject =="Applications of Mathematics":
@@ -98,9 +101,9 @@ data_store = DataStore()
 # may have an issue with grade boundaries for 2017 if not using 
 # my edited sqa spreadsheets
 # 
-years = [2017,2018,2019,2022]
+years = [2018,2019,2022,2023]
 for level in [75,76]:
-    subjects = data_store.readSchoolSubjects(2022,level)
+    subjects = data_store.readSchoolSubjects(2023,level)
     grade_boundaries = data_store.readGradeBoundariesAllYears(level=level,subjects=subjects)
     title = " Marks Trend.pdf"
     if level==75:

@@ -42,6 +42,9 @@ def findNearMiss(year,level,filename):
         # any subject that can be taken in another language needs to be brought in
         if (subject=="Nuadh-Eolas (Modern Studies)"):
             subject = "Modern Studies"
+        if (subject=="Matamataig (Mathematics)"):
+            subject = "Mathematics"
+            
         subject_bounds = grade_boundaries[grade_boundaries["Subject"]==subject]
 
         replace_dict = {}
@@ -71,8 +74,8 @@ def findNearMiss(year,level,filename):
     data.to_excel(filename)  
 
 
-findNearMiss(2022,75,"National5_nearmiss.xlsx")
-findNearMiss(2022,76,"Higher_nearmiss.xlsx")
+findNearMiss(2023,75,"National5_nearmiss.xlsx")
+findNearMiss(2023,76,"Higher_nearmiss.xlsx")
 
 exit()
 
