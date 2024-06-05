@@ -15,6 +15,7 @@ combine_courses = {}
 to_english ={}
 to_english["Nuadh-Eolas (Modern Studies)"] = "Modern Studies"
 to_english["Matamataig"] = "Mathematics"
+to_english["Matamataig (Mathematics)"] ="Mathematics"
 to_english["Gniomhachas Matamataigs"] = "Applications of Mathematics"
 to_english["Cruinn-eolas"] = "Geography"
 to_english["Eachdraidh"] = "History"
@@ -49,8 +50,6 @@ def getMarks(level,subject,data,combine=True):
 #       !!!!!!! the sqa are not consistent with the use of gaelic spelling this may not work! modern studies is know to work
 #       I have no data to check the chinese languages 
         if combine:
-            print (combine_courses["alt"])
-            exit()
             if subject in ["Modern Studies","History", "Geography","Applications of Mathematics","Mathematics", "Mandarin (Traditional)", "Mandarin (Simplified)","Cantonese"]:
                 if subject =="Modern Studies":
                     other_lang = data.readTotalMarks(year,level,"Nuadh-Eolas (Modern Studies)")
@@ -217,7 +216,7 @@ def makeComponentTable(school,national,plot):
     data = school.copy(deep=True)
     data["National Mean"] = temp["National Mean"]
     data["National Max"] = temp["National Max"]
-    data["Diff"] = data["School Mean"] - data["National Mean"]
+    data["Diff"] = data["School Mean"] - data["National Mean"].astype(float)
     data["Diff"] = data["Diff"].round(2)
     data["Diff %"] = (100*(data["Diff"]/data["National Max"])).round(0)
         
@@ -354,7 +353,7 @@ def createOverview(year,level,name):
             alt_subject = True
 
             boundaries = grade_boundaries[grade_boundaries["Subject"]==alt_subject_name]
-            national_grades = (national_attainment[national_attainment["Course"]==alt_subject_name])
+            national_grades = (national_attainment[national_attainment["Course"]==subject_name])
             #COMPONENTS STATS ARE AVAILABLE FROM SQA FOR NOT ENGLISH SUBJECTS 
             national_comp = national_components[national_components["Subject"]==subject_name]
         else:
@@ -362,13 +361,15 @@ def createOverview(year,level,name):
             national_grades = (national_attainment[national_attainment["Course"]==subject_name])
             national_comp = national_components[national_components["Subject"]==subject_name]
         
+        # print(subject_name)
+        # print(boundaries)
         # get the grade boundaries as a dict
         boundaries = boundaries.iloc[0].to_dict()
         # get marks from the data store. Remove_incomplete will remove pupils who have 
         # incomplete evidence, such as those pupils who did an assignment but not the exam, 
         # or pupils who did one paper but not the others
         school_attainment = data_store.readRawMarks(year,level,subject_name,remove_incomplete=True)
-        
+
         #get the total marks
         school_marks = school_attainment.groupby("SCN")["Mark"].sum().values
         # some subjects have multiple components and each mark
@@ -422,22 +423,230 @@ def createOverview(year,level,name):
 
 
 
-# test = True
+def specialMaths(year,level,name):
+    filename = "Maths Overview"
+    title = name+"\n "
+    if level==75:
+        filename = "National 5 "+filename
+        title += "National 5\n"
+    else:
+        filename = "Higher "+filename
+        title += "Higher\n"
+    title += str(year-1)+"-"+str(year)
+    
+    pdf = PdfPages(filename+".pdf")
+    fig, ax =plt.subplots(1,1,figsize=(11.69,8.27))
+    makeFrontPage(title,ax)
+    pdf.savefig()
+    plt.close()
 
-# if test:
-#     import cProfile
-#     prof = cProfile.Profile()
-#     prof.enable()
-#     createOverview(2022,75)
-#     prof.disable()
-#     prof.dump_stats("profile.prof")
-#     import pstats
-#     p = pstats.Stats("profile.prof")
-#     print(p.sort_stats("cumtime").print_stats(10))
-# else:
-#     createOverview(2022,75)
 
+    subjects = data_store.readSchoolSubjects(year,level)
+    
+    only_maths = []
+    only_maths.append("Mathematics")
+    only_maths.append("Matamataig (Mathematics)")
+    only_maths.append("Applications of Mathematics")
+    only_maths.append("Applications of Mathematics")
+    
+
+
+    grade_boundaries = data_store.readGradeBoundaries(level=level,year=year,subjects=subjects,marks=True)
+
+    
+    subject_names = subjects["Course Title"]
+    subject_codes = subjects["Course"]
+    # seperate attainment stats are not available for courses in alternative languages 
+    national_attainment = data_store.readSqaAttainment(year,level)
+
+    # though they are for components!
+    national_components = data_store.readComponentsSqa(year,level)
+
+
+    first_apps = False
+    for i in range(len(subject_names)):
+        
+        subject_name = subject_names[i]
+        
+        alt_subject = False
+        alt_subject_name = ""
+
+        if not (subject_name in only_maths):
+            pass
+        else:
+
+            if subject_name in combine_courses["english"].keys():
+                print("Found subject in other language")
+                print(subject_name)
+                alt_subject_name = combine_courses["english"][subject_name]
+                print("English equiv: ",alt_subject_name)
+                alt_subject = True
+
+                boundaries = grade_boundaries[grade_boundaries["Subject"]==alt_subject_name]
+                national_grades = (national_attainment[national_attainment["Course"]==subject_name])
+                #COMPONENTS STATS ARE AVAILABLE FROM SQA FOR NOT ENGLISH SUBJECTS 
+                national_comp = national_components[national_components["Subject"]==subject_name]
+            else:
+                boundaries = grade_boundaries[grade_boundaries["Subject"]==subject_name]
+                national_grades = (national_attainment[national_attainment["Course"]==subject_name])
+                national_comp = national_components[national_components["Subject"]==subject_name]
+            
+            # get the grade boundaries as a dict
+            boundaries = boundaries.iloc[0].to_dict()
+            national_grades = national_grades.iloc[0].to_dict()
+                    
+            if (subject_name== "Applications of Mathematics"):
+                for i in range(2):
+                    # get marks from the data store. Remove_incomplete will remove pupils who have 
+                    # incomplete evidence, such as those pupils who did an assignment but not the exam, 
+                    # or pupils who did one paper but not the others
+                    school_attainment = data_store.readRawMarks(year,level,subject_name,remove_incomplete=True)
+                    print(subject_name)
+                    
+
+                    if (i==1):
+                        maths = data_store.readRawMarks(year,level,"Mathematics",remove_incomplete=True)["SCN"].unique()
+                        gmaths = data_store.readRawMarks(year,level,"Matamataig (Mathematics)",remove_incomplete=True)["SCN"].unique()
+                        school_attainment = school_attainment[~school_attainment["SCN"].isin(maths) & ~school_attainment["SCN"].isin(gmaths)]
+                        
+                    
+                    #get the total marks
+                    school_marks = school_attainment.groupby("SCN")["Mark"].sum().values
+                    # some subjects have multiple components and each mark
+                    # for each candidate is listed, remove the duplicate lines
+                    school_grades = school_attainment.drop_duplicates(subset=["SCN"]).copy(deep=True)
+                    
+                    # reduce bands to grades
+                    
+                    bands = [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0]
+                    grades = ["A","A","B","B","C","C","D","NA","NA"]
+                    temp = school_grades["Band"]
+                    temp = temp.replace(bands,grades)
+                    
+                    school_grades = temp.value_counts().to_dict()
+                    grades = ["A","B","C","D","NA"]
+                    total = 0
+                    for grade in grades:
+                        if not grade in school_grades.keys():
+                            school_grades[grade] = 0
+                        else:
+                            total += school_grades[grade]
+                    
+                    school_grades["Total"] = total
+                    # data_store.readComponentsSqa(year,level)
+
+
+
+                    
+                    
+                    fig, axes =plt.subplots(2,2,figsize=(11.69,8.27))
+                    # axes[0][1].axis('off')
+                    national_marks = estimateMarkDistribution(national_grades,boundaries)
+                    raw_marks = data_store.readTotalMarks(year,level,subject_name,remove_incomplete=True)
+                    makeMarksGraph(national_marks,school_marks,boundaries,axes[0][0])
+                    makeGradesGraph(national_grades,school_grades,boundaries,axes[0][1])
+                    makeGradeTable(national_grades,school_grades,axes[1][1])
+
+                    temp = school_attainment.groupby("Component")["Mark"]
+                    school_comp = pd.DataFrame({"School Mean":temp.mean(),"School Std":temp.std(),"School Max":temp.max()})
+                    national_comp = national_comp.dropna(axis=1, how='all')
+                    
+                    makeComponentTable(school_comp, national_comp,axes[1][0])
+                    if (i==1):
+                        subject_name = "Apps Maths (excluding pupils sitting Maths or Matamataig)"
+                    
+                    plt.figtext(0.95, 0.95, subject_name, wrap=True, horizontalalignment='right', fontsize=24)
+
+                    # plt.show()
+                    pdf.savefig()
+                    plt.close()
+            else:
+                # get marks from the data store. Remove_incomplete will remove pupils who have 
+                    # incomplete evidence, such as those pupils who did an assignment but not the exam, 
+                    # or pupils who did one paper but not the others
+                    school_attainment = data_store.readRawMarks(year,level,subject_name,remove_incomplete=True)
+                    print(subject_name)
+                    
+
+                    if (i==1):
+                        maths = data_store.readRawMarks(year,level,"Mathematics",remove_incomplete=True)["SCN"].unique()
+                        gmaths = data_store.readRawMarks(year,level,"Matamataig (Mathematics)",remove_incomplete=True)["SCN"].unique()
+                        school_attainment = school_attainment[~school_attainment["SCN"].isin(maths) & ~school_attainment["SCN"].isin(gmaths)]
+                        
+                    
+                    #get the total marks
+                    school_marks = school_attainment.groupby("SCN")["Mark"].sum().values
+                    # some subjects have multiple components and each mark
+                    # for each candidate is listed, remove the duplicate lines
+                    school_grades = school_attainment.drop_duplicates(subset=["SCN"]).copy(deep=True)
+                    
+                    # reduce bands to grades
+                    
+                    bands = [1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0]
+                    grades = ["A","A","B","B","C","C","D","NA","NA"]
+                    temp = school_grades["Band"]
+                    temp = temp.replace(bands,grades)
+                    
+                    school_grades = temp.value_counts().to_dict()
+                    grades = ["A","B","C","D","NA"]
+                    total = 0
+                    for grade in grades:
+                        if not grade in school_grades.keys():
+                            school_grades[grade] = 0
+                        else:
+                            total += school_grades[grade]
+                    
+                    school_grades["Total"] = total
+                    # data_store.readComponentsSqa(year,level)
+
+
+
+                    
+                    
+                    fig, axes =plt.subplots(2,2,figsize=(11.69,8.27))
+                    # axes[0][1].axis('off')
+                    national_marks = estimateMarkDistribution(national_grades,boundaries)
+                    raw_marks = data_store.readTotalMarks(year,level,subject_name,remove_incomplete=True)
+                    makeMarksGraph(national_marks,school_marks,boundaries,axes[0][0])
+                    makeGradesGraph(national_grades,school_grades,boundaries,axes[0][1])
+                    makeGradeTable(national_grades,school_grades,axes[1][1])
+
+                    temp = school_attainment.groupby("Component")["Mark"]
+                    school_comp = pd.DataFrame({"School Mean":temp.mean(),"School Std":temp.std(),"School Max":temp.max()})
+                    national_comp = national_comp.dropna(axis=1, how='all')
+                    
+                    makeComponentTable(school_comp, national_comp,axes[1][0])
+                    if (i==1):
+                        subject_name = "Apps Maths (excluding pupils sitting Maths or Matamataig)"
+                    
+                    plt.figtext(0.95, 0.95, subject_name, wrap=True, horizontalalignment='right', fontsize=24)
+
+                    # plt.show()
+                    pdf.savefig()
+                    plt.close()
+    pdf.close()
+
+
+
+test = False
 institution = "Portree High School"
-year = 2022
+year = 2023
+
+if test:
+    import cProfile
+    prof = cProfile.Profile()
+    prof.enable()
+    createOverview(year,75,institution)
+
+    prof.disable()
+    prof.dump_stats("profile.prof")
+    import pstats
+    p = pstats.Stats("profile.prof")
+    print(p.sort_stats("cumtime").print_stats(10))
+else:
+    # specialMaths(year,75,institution)
+    createOverview(year,75,institution)
+
+
 createOverview(year,75,institution)
 createOverview(year,76,institution)
