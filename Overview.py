@@ -77,7 +77,7 @@ def getMarks(level,subject,data,combine=True):
     return marks
 
 def createSubjectMarkTrends(data,level,data_store,title):
-    pdf = PdfPages(title)
+    pdf = PdfPages("Output/"+title)
     cols = []
     for grade in ["Max","A","B","C","D"]:
         for year in [2017,2018,2019,2022,2023]:
@@ -349,7 +349,7 @@ def createOverview(year,level,name):
         title += "Higher\n"
     title += str(year-1)+"-"+str(year)
     
-    pdf = PdfPages(filename+".pdf")
+    pdf = PdfPages("Output/"+filename+".pdf")
     fig, ax =plt.subplots(1,1,figsize=(11.69,8.27))
     makeFrontPage(title,ax)
     pdf.savefig()
@@ -462,7 +462,7 @@ def specialMaths(year,level,name):
         title += "Higher\n"
     title += str(year-1)+"-"+str(year)
     
-    pdf = PdfPages(filename+".pdf")
+    pdf = PdfPages("Output/"+filename+".pdf")
     fig, ax =plt.subplots(1,1,figsize=(11.69,8.27))
     makeFrontPage(title,ax)
     pdf.savefig()

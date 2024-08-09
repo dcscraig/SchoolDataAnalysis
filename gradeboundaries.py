@@ -56,7 +56,7 @@ def createGradeBoundariesYearLevel(data,year,level,ax):
 
 data_import = DataStore()
 year = 2024
-pdf = PdfPages(str(year)+" Grade Boundaries.pdf")
+pdf = PdfPages("Output/"+str(year)+" Grade Boundaries.pdf")
 fig, ax = plt.subplots(constrained_layout=True,figsize=(11.69,8.27))
 createGradeBoundariesYearLevel(data_import,year,75,ax)
 pdf.savefig() 

@@ -74,8 +74,8 @@ def findNearMiss(year,level,filename):
     data.to_excel(filename)  
 
 
-findNearMiss(2024,75,"National5_nearmiss.xlsx")
-findNearMiss(2024,76,"Higher_nearmiss.xlsx")
+findNearMiss(2024,75,"Output/National5_nearmiss.xlsx")
+findNearMiss(2024,76,"Output/Higher_nearmiss.xlsx")
 
 exit()
 

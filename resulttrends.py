@@ -52,7 +52,7 @@ def getMarks(level,subject,data,years,combine=True):
     return marks
 
 def createSubjectMarkTrends(years,data,level,data_store,title):
-    pdf = PdfPages(title)
+    pdf = PdfPages("Output/"+title)
     cols = []
     for grade in ["Max","A","B","C","D"]:
         for year in years:
