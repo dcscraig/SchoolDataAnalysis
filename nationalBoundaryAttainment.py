@@ -21,7 +21,7 @@ for level in [75,76]:
     else:
         filename = "Higher "+filename
     
-    pdf = PdfPages(filename+".pdf")
+    pdf = PdfPages("Output/"+filename+".pdf")
     fig, ax =plt.subplots(1,1,figsize=(11.69,8.27))
     
 
