@@ -49,7 +49,7 @@ class ComponentCache:
         self.sheet_names[76] = "Higher"
         
     def __cleanData(self,data):
-        print(data.columns)
+        
         if("Gaidhlig" in data['Subject'].unique()):
             data['Subject'] = data['Subject'].replace(['Gaidhlig'], 'Gàidhlig')
         return data
@@ -107,7 +107,6 @@ class NationalAttainmentCache:
         
         
     def __cleanData(self,data):
-        print(data.columns)
         data = data.replace("[c]",numpy.nan)
         if("Gaidhlig" in data['Subject'].unique()):
             data['Subject'] = data['Subject'].replace(['Gaidhlig'], 'Gàidhlig')
@@ -138,9 +137,9 @@ class NationalAttainmentCache:
         data = data.rename(columns=col_dict)
         data = data.fillna(0)
         # WILL NEED TO DOUBLE CHECK THIS!!
+        # will need to find a solution to this 
+        # for pandas 3!!!       
         data = data.replace("[z]",0)
-        print(data)
-
         data["A"] = data["A"].astype(int)
         data["A-B"] = data["A-B"].astype(int)
         data["A-C"] = data["A-C"].astype(int)
@@ -150,7 +149,7 @@ class NationalAttainmentCache:
         data["B"] = data["A-B"] - data["A"]
         data["C"] = data["A-C"] - data["A-B"]
         data["D"] = data["A-D"] - data["A-C"]
-        # SQA try to hide the number of no awards
+        # SQA sometimes try to hide the number of no awards
         # but provide all the information required to 
         # calculate it..
         data["NA"] = data["Total"] - data["A-D"]

@@ -12,7 +12,7 @@ class DataStore:
 
     def __init__(self):
         self.valid_years = [2018,2019,2022,2023,2024]
-        self.valid_levels = [75,76]
+        self.valid_levels = [75,76,77]
         self.valid_grades = ["A","B","C","D"]
         self.results_cache = {}
 
@@ -22,7 +22,7 @@ class DataStore:
         self.boundaries = BoundaryCache(boundary_filename)
         sqa_filename = "Data/sqaAttainment/2019-2024.xlsx"  
         self.sqa_attainment = NationalAttainmentCache(sqa_filename)
-        comp_filename = "Data/ComponentMarks/2024.xlsx"  
+        comp_filename = "Data/ComponentMarks/?.xlsx"  
         self.components = ComponentCache(comp_filename)
         
     def checkYears(self,year):

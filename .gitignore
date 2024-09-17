@@ -1,3 +1,13 @@
 Data/SchoolResults/*
 Output/*
 !Output/readme
+
+Output/reportgraphs/comp/*
+Output/reportgraphs/historic/*
+Output/reportgraphs/Subject Overviews/*
+
+!Output/reportgraphs/comp/readme
+!Output/reportgraphs/historic/readme
+!Output/reportgraphs/Subject Overviews/readme
+*.pyc
+
